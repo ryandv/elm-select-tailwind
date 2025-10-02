@@ -128,6 +128,5 @@ subscriptions =
 
 {-| Component's view.
 -}
-view : Config a msg -> State a -> Html msg
 view =
     MultiSelect.MultiSelect.view

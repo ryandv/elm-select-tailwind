@@ -14,7 +14,9 @@
         "elm/core": "1.0.0 <= v < 2.0.0",
         "elm/html": "1.0.0 <= v < 2.0.0",
         "elm/json": "1.0.0 <= v < 2.0.0",
-        "elm/svg": "1.0.0 <= v < 2.0.0"
+        "elm/svg": "1.0.0 <= v < 2.0.0",
+        "rtfeldman/elm-css": "18.0.0 <= v < 19.0.0",
+        "matheus23/elm-default-tailwind-modules": "4.0.1"
     },
     "test-dependencies": {}
 }
