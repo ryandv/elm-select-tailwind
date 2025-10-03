@@ -23,14 +23,14 @@ view (Config c) (State s) =
         [ div [ css [ Tw.w_full, Tw.mx_auto ] ]
             [ div [ css [ Tw.flex, Tw.flex_col, Tw.items_center, Tw.relative  ] ]
                 [ div [ css [ Tw.w_full ] ]
-                    [ div [ css [Tw.flex, Tw.border, Tw.border_color Tw.gray_200, Tw.bg_color Tw.white, Tw.rounded ] ]
+                    [ div [ css [Tw.flex, Tw.border, Tw.border_color Tw.zinc_600, Tw.bg_color Tw.zinc_900, Tw.rounded ] ]
                         [ viewSelectedItems (Config c) (State s)
                         , viewInputSearch (Config c) (State s)
                         , viewButtonShow (Config c) (State s)
                         ]
                     ]
                 , div
-                    [ css (iff s.isOpened [ Tw.absolute, Tw.shadow, Tw.top_full, Tw.bg_color Tw.white, Tw.z_40, Tw.w_full, Tw.left_0, Tw.rounded, Tw.max_h_32, Tw.overflow_y_auto, Tw.mt_2 ] [ Tw.hidden ])
+                    [ css (iff s.isOpened [ Tw.absolute, Tw.shadow, Tw.top_full, Tw.bg_color Tw.zinc_900, Tw.z_40, Tw.w_full, Tw.left_0, Tw.rounded, Tw.max_h_32, Tw.overflow_y_auto, Tw.mt_2 ] [ Tw.hidden ])
                     ]
                     [ viewItems (Config c) (State s)
                     ]
@@ -44,7 +44,7 @@ viewInputSearch (Config c) (State s) =
     div [ css [ Tw.mx_4, Tw.grow ] ]
         [ input
             [ type_ "text"
-            , css [ Tw.form_input, Tw.w_full, Tw.border_0, Tw.rounded_md, focus [ Tw.border_color Tw.blue_400, Tw.ring, Tw.ring_color (Tw.withOpacity Tw.opacity50 Tw.blue_200), Css.property "appearance" "none" ] ]
+            , css [ Tw.form_input, Tw.w_full, Tw.border_0, Tw.rounded_md, Tw.text_color Tw.zinc_300, Tw.bg_color Tw.zinc_900, focus [ Tw.border_color Tw.blue_400, Tw.ring, Tw.ring_color (Tw.withOpacity Tw.opacity50 Tw.blue_200), Css.property "appearance" "none" ] ]
             , placeholder c.placeholder
             , value s.search
             , Html.Styled.Attributes.fromUnstyled (onInput (\x -> c.pipe <| State { s | search = x }))
@@ -62,9 +62,9 @@ onFocusIn msg = Html.Styled.Attributes.fromUnstyled <|
 
 viewButtonShow : Config a msg -> State a -> Html msg
 viewButtonShow (Config c) (State s) =
-    div [ css [ Tw.text_color Tw.gray_300, Tw.w_8, Tw.py_1, Tw.pl_2, Tw.pr_1, Tw.border_l, Tw.flex, Tw.items_center, Tw.border_color Tw.gray_200 ] ]
+    div [ css [ Tw.text_color Tw.zinc_500, Tw.w_8, Tw.py_1, Tw.pl_2, Tw.pr_1, Tw.border_l, Tw.flex, Tw.items_center, Tw.border_color Tw.zinc_600 ] ]
         [ button
-            [ css [ Tw.cursor_pointer, Tw.w_6, Tw.h_6, Tw.text_color Tw.gray_600, Tw.outline_none, focus [ Tw.outline_none ] ]
+            [ css [ Tw.cursor_pointer, Tw.w_6, Tw.h_6, Tw.text_color Tw.zinc_600, Tw.outline_none, focus [ Tw.outline_none ] ]
             , id "select_dropdown"
             , Html.Styled.Attributes.fromUnstyled <| onClick (c.pipe (State { s | isOpened = not s.isOpened }))
             ]
@@ -86,7 +86,7 @@ viewSelectedItems (Config c) (State s) =
 viewSelectedItem : (a -> String) -> (a -> msg) -> a -> Html msg
 viewSelectedItem getValue click x =
     div
-        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.white, Tw.rounded_full, Tw.text_color Tw.blue_700, Tw.bg_color Tw.blue_100, Tw.border, Tw.border_color Tw.blue_300 ]
+        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.zinc_900, Tw.rounded_full, Tw.text_color Tw.zinc_200, Tw.bg_color (Tw.withOpacity Tw.opacity30 Tw.lime_300), Tw.border, Tw.border_color (Tw.withOpacity Tw.opacity30 Tw.lime_300) ]
         ]
         [ div [ css [ Tw.text_xs, Tw.font_normal, Tw.leading_none, Tw.max_w_full, Tw.flex_initial ] ]
             [ text (getValue x) ]
@@ -129,15 +129,15 @@ viewItems (Config c) (State s) =
 viewItem : (a -> String) -> (a -> msg) -> a -> Bool -> Html msg
 viewItem getValue click x enable =
     div
-        [ css [ Tw.cursor_pointer, Tw.w_full, Tw.border_color Tw.gray_100, Tw.rounded_t, Tw.border_b, hover [ Tw.bg_color Tw.blue_100 ] ]
+        [ css [ Tw.cursor_pointer, Tw.w_full, Tw.border_color Tw.zinc_500, Tw.rounded_t, Tw.border_b, hover [ Tw.bg_color (Tw.withOpacity Tw.opacity30 Tw.lime_300) ] ]
         , id "select_dropdown"
         , Html.Styled.Attributes.fromUnstyled <| onClick (click x)
         ]
         [ div
-            [ css (iff enable [ Tw.flex, Tw.w_full, Tw.items_center, Tw.p_2, Tw.pl_2, Tw.border_l_2, Tw.relative, Tw.border_color Tw.blue_600 ] [ Tw.flex, Tw.w_full, Tw.items_center, Tw.p_2, Tw.pl_2, Tw.border_l_2, Tw.relative, hover [ Tw.border_color Tw.blue_100 ] ])
+            [ css (iff enable [ Tw.flex, Tw.w_full, Tw.items_center, Tw.p_2, Tw.pl_2, Tw.border_l_2, Tw.relative, Tw.border_color (Tw.withOpacity Tw.opacity30 Tw.lime_300) ] [ Tw.flex, Tw.w_full, Tw.items_center, Tw.p_2, Tw.pl_2, Tw.border_l_2, Tw.relative, hover [ Tw.border_color (Tw.withOpacity Tw.opacity30 Tw.lime_300) ] ])
             ]
             [ div [ css [ Tw.w_full, Tw.items_center, Tw.flex ] ]
-                [ div [ css [ Tw.mx_2, Tw.leading_6 ] ]
+                [ div [ css [ Tw.mx_2, Tw.leading_6, Tw.text_color Tw.zinc_200 ] ]
                     [ text (getValue x) ]
                 ]
             ]
