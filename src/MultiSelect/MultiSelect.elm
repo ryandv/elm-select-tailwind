@@ -23,14 +23,14 @@ view (Config c) (State s) =
         [ div [ css [ Tw.w_full, Tw.mx_auto ] ]
             [ div [ css [ Tw.flex, Tw.flex_col, Tw.items_center, Tw.relative  ] ]
                 [ div [ css [ Tw.w_full ] ]
-                    [ div [ css [Tw.flex, Tw.border, Tw.border_color Tw.gray_200, Tw.bg_color Tw.white, Tw.rounded ] ]
+                    [ div [ css [Tw.flex, Tw.border, Tw.border_color Tw.gray_200, Tw.bg_color Tw.zinc_900, Tw.rounded ] ]
                         [ viewSelectedItems (Config c) (State s)
                         , viewInputSearch (Config c) (State s)
                         , viewButtonShow (Config c) (State s)
                         ]
                     ]
                 , div
-                    [ css (iff s.isOpened [ Tw.absolute, Tw.shadow, Tw.top_full, Tw.bg_color Tw.white, Tw.z_40, Tw.w_full, Tw.left_0, Tw.rounded, Tw.max_h_32, Tw.overflow_y_auto, Tw.mt_2 ] [ Tw.hidden ])
+                    [ css (iff s.isOpened [ Tw.absolute, Tw.shadow, Tw.top_full, Tw.bg_color Tw.zinc_900, Tw.z_40, Tw.w_full, Tw.left_0, Tw.rounded, Tw.max_h_32, Tw.overflow_y_auto, Tw.mt_2 ] [ Tw.hidden ])
                     ]
                     [ viewItems (Config c) (State s)
                     ]
@@ -44,7 +44,7 @@ viewInputSearch (Config c) (State s) =
     div [ css [ Tw.mx_4, Tw.grow ] ]
         [ input
             [ type_ "text"
-            , css [ Tw.form_input, Tw.w_full, Tw.border_0, Tw.rounded_md, focus [ Tw.border_color Tw.blue_400, Tw.ring, Tw.ring_color (Tw.withOpacity Tw.opacity50 Tw.blue_200), Css.property "appearance" "none" ] ]
+            , css [ Tw.form_input, Tw.w_full, Tw.border_0, Tw.rounded_md, Tw.bg_color Tw.zinc_900, focus [ Tw.border_color Tw.blue_400, Tw.ring, Tw.ring_color (Tw.withOpacity Tw.opacity50 Tw.blue_200), Css.property "appearance" "none" ] ]
             , placeholder c.placeholder
             , value s.search
             , Html.Styled.Attributes.fromUnstyled (onInput (\x -> c.pipe <| State { s | search = x }))
@@ -86,7 +86,7 @@ viewSelectedItems (Config c) (State s) =
 viewSelectedItem : (a -> String) -> (a -> msg) -> a -> Html msg
 viewSelectedItem getValue click x =
     div
-        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.white, Tw.rounded_full, Tw.text_color Tw.blue_700, Tw.bg_color Tw.blue_100, Tw.border, Tw.border_color Tw.blue_300 ]
+        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.zinc_900, Tw.rounded_full, Tw.text_color Tw.blue_700, Tw.bg_color Tw.blue_100, Tw.border, Tw.border_color Tw.blue_300 ]
         ]
         [ div [ css [ Tw.text_xs, Tw.font_normal, Tw.leading_none, Tw.max_w_full, Tw.flex_initial ] ]
             [ text (getValue x) ]
