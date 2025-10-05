@@ -75,7 +75,7 @@ viewButtonShow (Config c) (State s) =
 
 viewSelectedItems : Config a msg -> State a -> Html msg
 viewSelectedItems (Config c) (State s) =
-    div [ css [ Tw.shrink, Tw.flex, Tw.flex_wrap ] ] <|
+    div [ css [ Tw.shrink, Tw.flex, Tw.flex_wrap, Tw.max_w_xs ] ] <|
         List.map
             (viewSelectedItem c.getValue
                 (\x -> c.pipe <| State { s | selected = removeItem c s x })
@@ -86,7 +86,7 @@ viewSelectedItems (Config c) (State s) =
 viewSelectedItem : (a -> String) -> (a -> msg) -> a -> Html msg
 viewSelectedItem getValue click x =
     div
-        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.zinc_900, Tw.rounded_full, Tw.text_color Tw.zinc_200, Tw.bg_color (Tw.withOpacity Tw.opacity30 Tw.lime_300), Tw.border, Tw.border_color (Tw.withOpacity Tw.opacity30 Tw.lime_300) ]
+        [ css [ Tw.flex, Tw.justify_center, Tw.items_center, Tw.m_1, Tw.font_medium, Tw.py_1, Tw.px_2, Tw.bg_color Tw.zinc_900, Tw.rounded_full, Tw.text_color Tw.zinc_200, Tw.bg_color (Tw.withOpacity Tw.opacity30 Tw.lime_300), Tw.border, Tw.border_color (Tw.withOpacity Tw.opacity30 Tw.lime_300), Tw.max_w_min ]
         ]
         [ div [ css [ Tw.text_xs, Tw.font_normal, Tw.leading_none, Tw.max_w_full, Tw.flex_initial ] ]
             [ text (getValue x) ]
